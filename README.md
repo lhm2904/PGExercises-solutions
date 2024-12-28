@@ -46,5 +46,6 @@ CREATE TABLE cd.bookings
        CONSTRAINT fk_bookings_facid FOREIGN KEY (facid) REFERENCES cd.facilities(facid),
        CONSTRAINT fk_bookings_memid FOREIGN KEY (memid) REFERENCES cd.members(memid)  
     );
+```
+![image](https://github.com/user-attachments/assets/7994cb25-f129-41cd-9cee-0e5c3e15a92a)
 
-![image](https://github.com/user-attachments/assets/9428076e-a09f-40eb-ad0a-b2af5a485460)
