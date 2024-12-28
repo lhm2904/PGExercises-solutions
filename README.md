@@ -1,5 +1,5 @@
 # PGExercises-solutions
-My solutions to the SQL practice problems on pgexercises.com
+My solutions to the SQL practice problems on [pgexercises.com](pgexercises.com)
 
 # Exercises structure:
 ## Section 1: Basic
