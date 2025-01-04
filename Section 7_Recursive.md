@@ -37,3 +37,44 @@ ON recommender = memid;
 ```
 
 This query is now much cleaner.
+
+## Question 2: Find the downward recommendation chain for member ID 1
+
+Find the downward recommendation chain for member ID 1: that is, the members they recommended, the members those members recommended, and so on. Return member ID and name, and order by ascending member id.
+
+```sql
+WITH RECURSIVE recommend AS (  
+    SELECT memid  
+    FROM cd.members  
+    WHERE recommendedby = 1  
+    UNION ALL  
+    SELECT members.memid  
+    FROM recommend JOIN cd.members  
+        ON recommend.memid = members.recommendedby)  
+  
+SELECT memid, firstname, surname  
+FROM recommend INNER JOIN cd.members  
+USING (memid)  
+ORDER BY memid;
+```
+## Question 3: Produce a CTE that can return the upward recommendation chain for any member
+
+Produce a CTE that can return the upward recommendation chain for any member. You should be able to select recommender from recommenders where member=x. Demonstrate it by getting the chains for members 12 and 22. Results table should have member and recommender, ordered by member ascending, recommender descending.
+
+```sql
+WITH RECURSIVE  
+    recommend AS (  
+        SELECT memid, recommendedby AS recommender  
+        FROM cd.members  
+        UNION ALL  
+        SELECT recommend.memid, members.recommendedby  
+        FROM recommend INNER JOIN cd.members  
+            ON recommend.recommender = members.memid)  
+  
+SELECT rec.memid AS member, recommender, firstname, surname  
+FROM recommend rec JOIN cd.members mem  
+    ON rec.recommender = mem.memid  
+WHERE rec.memid = 12  
+   OR rec.memid = 22  
+ORDER BY member, recommender DESC;
+```
