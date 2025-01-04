@@ -71,4 +71,17 @@ The telephone numbers in the database are very inconsistently formatted. You'd l
 SELECT memid, REGEXP_REPLACE(telephone, '^\(*([0-9]+)\)*[ -]([0-9]+)[ -]([0-9]+)$', '\1\2\3') AS telephone  
 FROM cd.members;
 ```
-
+>[!note]
+> `*` : 0 or more repetitions.
+>
+> `+` : 1 or more repetitions.
+>
+> `[123...]`  : Either one of the values.
+>
+> `^` : Start of the string.
+>
+> `$` : End of the string.
+>
+> `()` : capturing group.
+>
+> `\1 \2 \3` : Return the nth capturing group.
